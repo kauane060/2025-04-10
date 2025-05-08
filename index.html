@@ -1,12 +1,572 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
+
 <head>
-<meta charset="UTF-8">
-<title>Meu Portfólio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Portfólio de Kauane</title>
+    <style>
+        :root {
+            --rosa-pastel: #FFD1DC;
+            --rosa-claro: #FFB6C1;
+            --rosa-medio: #FF69B4;
+            --rosa-escuro: #DB7093;
+            --rosa-profundo: #C71585;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--rosa-pastel);
+            color: var(--rosa-profundo);
+            line-height: 1.6;
+        }
+        
+        .navbar-custom {
+            background-color: var(--rosa-medio);
+        }
+        
+        .navbar-custom .navbar-brand,
+        .navbar-custom .nav-link {
+            color: white;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--rosa-claro) 0%, var(--rosa-pastel) 100%);
+            padding: 5rem 0;
+            border-radius: 0 0 30px 30px;
+            margin-bottom: 3rem;
+        }
+        
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 20px;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .btn-rosa {
+            background-color: var(--rosa-medio);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-rosa:hover {
+            background-color: var(--rosa-escuro);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        .badge-rosa {
+            background-color: var(--rosa-medio);
+            color: white;
+            font-weight: 500;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            padding: 8px 15px;
+            border-radius: 50px;
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 4px;
+            background-color: var(--rosa-medio);
+            bottom: -10px;
+            left: 0;
+            border-radius: 2px;
+        }
+        
+        .social-icon {
+            font-size: 1.5rem;
+            color: var(--rosa-profundo);
+            margin-right: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            color: var(--rosa-escuro);
+            transform: scale(1.2);
+        }
+        
+        footer {
+            background-color: var(--rosa-medio);
+            color: white;
+            padding: 3rem 0;
+            margin-top: 3rem;
+        }
+        
+        .modal-content {
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        .modal-header {
+            background-color: var(--rosa-medio);
+            color: white;
+        }
+        
+        .progress {
+            height: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        
+        .progress-bar {
+            background-color: var(--rosa-escuro);
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .timeline:before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: var(--rosa-medio);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+        }
+        
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 5px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: var(--rosa-escuro);
+            border: 3px solid white;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 3rem 0;
+            }
+            
+            .profile-img {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
 </head>
+
 <body>
-<h1>Olá, eu sou Kauane!</h1>
-  <p>Sou uma desenvolvedora web apaixonado por criar sites incríveis.</p>
-  <p>Este é um exemplo simples de portfólio usando HTML básico.</p>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">Kauane</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#inicio">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#sobre">Sobre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#projetos">Projetos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#habilidades">Habilidades</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contato">Contato</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero-section text-center">
+        <div class="container">
+            <img src="https://i.pravatar.cc/300" alt="Foto de Kauane" class="profile-img rounded-circle mb-4">
+            <h1 class="display-4 fw-bold mb-3">Kauane</h1>
+            <p class="lead mb-4">Estudante do Colégio Dom Pedro II</p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="#projetos" class="btn btn-rosa btn-lg">Meus Projetos</a>
+                <a href="#contato" class="btn btn-outline-light btn-lg">Contato</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre Mim -->
+    <section id="sobre" class="py-5">
+        <div class="container">
+            <h2 class="section-title">Sobre Mim</h2>
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <p class="lead">Olá! Eu sou a Kauane, tenho 15 anos e sou estudante do Colégio Dom Pedro II.</p>
+                    <p>Desde pequena sempre fui apaixonada por aprender coisas novas e me desafiar. No colégio, me interesso especialmente pelas áreas de ciências e tecnologia, sempre buscando ir além do conteúdo ensinado em sala de aula.</p>
+                    <p>Nos meus tempos livres, gosto de desenvolver pequenos projetos criativos, ler livros de fantasia e assistir séries. Estou sempre em busca de novos conhecimentos e experiências que possam me ajudar a crescer tanto pessoal quanto academicamente.</p>
+                    <p>Acredito que a educação é a chave para um futuro melhor e por isso me dedico intensamente aos meus estudos, sempre buscando excelência em tudo que faço.</p>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card p-4">
+                        <h4 class="mb-4">Minha Jornada</h4>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <h5>Colégio Dom Pedro II</h5>
+                                <p class="text-muted">2023 - Presente</p>
+                                <p>Estudante do ensino médio, participando ativamente de projetos extracurriculares e olimpíadas do conhecimento.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h5>Projetos Criativos</h5>
+                                <p class="text-muted">2022 - Presente</p>
+                                <p>Desenvolvimento de pequenos projetos pessoais envolvendo tecnologia, arte e criatividade.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h5>Ensino Fundamental</h5>
+                                <p class="text-muted">2015 - 2022</p>
+                                <p>Formação básica com destaque em atividades colaborativas e desenvolvimento de habilidades socioemocionais.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Habilidades -->
+    <section id="habilidades" class="py-5 bg-white">
+        <div class="container">
+            <h2 class="section-title">Minhas Habilidades</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <h4 class="mb-4">Habilidades Técnicas</h4>
+                    <div>
+                        <h6>Pacote Office</h6>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <h6>Design Básico</h6>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 70%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <h6>HTML/CSS Básico</h6>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 60%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <h6>Edição de Vídeo</h6>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 65%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h4 class="mb-4">Habilidades Pessoais</h4>
+                    <div>
+                        <h6>Trabalho em Equipe</h6>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <h6>Criatividade</h6>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <h6>Organização</h6>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 80%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <h6>Comunicação</h6>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 75%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-5">
+                <h4 class="mb-4">Interesses</h4>
+                <div class="d-flex flex-wrap">
+                    <span class="badge-rosa">Tecnologia</span>
+                    <span class="badge-rosa">Arte Digital</span>
+                    <span class="badge-rosa">Fotografia</span>
+                    <span class="badge-rosa">Leitura</span>
+                    <span class="badge-rosa">Música</span>
+                    <span class="badge-rosa">Ciências</span>
+                    <span class="badge-rosa">Design</span>
+                    <span class="badge-rosa">Voluntariado</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projetos -->
+    <section id="projetos" class="py-5">
+        <div class="container">
+            <h2 class="section-title">Meus Projetos</h2>
+            <p class="lead mb-5">Alguns dos projetos que desenvolvi durante minha jornada acadêmica e pessoal.</p>
+            
+            <div class="row">
+                <!-- Projeto 1 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="https://source.unsplash.com/random/600x400/?school,project" class="card-img-top" alt="Projeto Escolar">
+                        <div class="card-body">
+                            <h5 class="card-title">Feira de Ciências 2023</h5>
+                            <p class="card-text">Projeto desenvolvido para a feira de ciências do colégio sobre sustentabilidade e reciclagem, com maquetes interativas e dados coletados na comunidade escolar.</p>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <button type="button" class="btn btn-rosa" data-bs-toggle="modal" data-bs-target="#modal1">Ver Detalhes</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Projeto 2 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="https://source.unsplash.com/random/600x400/?art,digital" class="card-img-top" alt="Arte Digital">
+                        <div class="card-body">
+                            <h5 class="card-title">Coleção de Arte Digital</h5>
+                            <p class="card-text">Série de ilustrações digitais criadas como hobby, explorando diferentes técnicas e estilos artísticos usando ferramentas gratuitas de design.</p>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <button type="button" class="btn btn-rosa" data-bs-toggle="modal" data-bs-target="#modal2">Ver Detalhes</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Projeto 3 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="https://source.unsplash.com/random/600x400/?website,design" class="card-img-top" alt="Site Pessoal">
+                        <div class="card-body">
+                            <h5 class="card-title">Primeiro Site Pessoal</h5>
+                            <p class="card-text">Meu primeiro experimento com HTML e CSS, criando um site simples para compartilhar meus interesses e projetos iniciais.</p>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <button type="button" class="btn btn-rosa" data-bs-toggle="modal" data-bs-target="#modal3">Ver Detalhes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal 1 -->
+    <div class="modal fade" id="modal1" tabindex="-1" aria-labelledby="modal1Label" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal1Label">Feira de Ciências 2023</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img src="https://source.unsplash.com/random/800x600/?science,fair" class="img-fluid rounded mb-3" alt="Feira de Ciências">
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Sobre o Projeto</h4>
+                            <p>Este projeto foi desenvolvido para a Feira de Ciências anual do Colégio Dom Pedro II em 2023, com o tema "Sustentabilidade e Reciclagem: Pequenas Ações, Grandes Impactos".</p>
+                            <p>Em equipe, realizamos pesquisas sobre os hábitos de reciclagem na comunidade escolar, criamos maquetes interativas mostrando o ciclo de vida dos materiais recicláveis, e desenvolvemos um guia prático para separação correta do lixo.</p>
+                            <h4 class="mt-4">Tecnologias Utilizadas</h4>
+                            <ul>
+                                <li>Pesquisa de campo e análise de dados</li>
+                                <li>Materiais reciclados para as maquetes</li>
+                                <li>Design gráfico para os materiais informativos</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2 -->
+    <div class="modal fade" id="modal2" tabindex="-1" aria-labelledby="modal2Label" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal2Label">Coleção de Arte Digital</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img src="https://source.unsplash.com/random/800x600/?digital,art" class="img-fluid rounded mb-3" alt="Arte Digital">
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Sobre o Projeto</h4>
+                            <p>Minha coleção de arte digital começou como um hobby durante o período de aulas online, quando descobri ferramentas gratuitas de design e decidi explorar minha criatividade.</p>
+                            <p>A coleção inclui mais de 30 peças criadas ao longo de um ano, explorando diferentes temas como natureza abstrata, retratos estilizados e ilustrações conceituais. Todas as obras foram criadas usando apenas um tablet básico e software gratuito.</p>
+                            <h4 class="mt-4">Técnicas Utilizadas</h4>
+                            <ul>
+                                <li>Ilustração digital com camadas</li>
+                                <li>Uso de pincéis personalizados</li>
+                                <li>Exploração de paletas de cores</li>
+                                <li>Composição e teoria da cor</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 3 -->
+    <div class="modal fade" id="modal3" tabindex="-1" aria-labelledby="modal3Label" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal3Label">Primeiro Site Pessoal</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img src="https://source.unsplash.com/random/800x600/?website,code" class="img-fluid rounded mb-3" alt="Site Pessoal">
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Sobre o Projeto</h4>
+                            <p>Meu primeiro site pessoal foi criado como um projeto de autoaprendizado em HTML e CSS básicos. A ideia era ter um espaço online para compartilhar meus interesses e projetos iniciais.</p>
+                            <p>O site inclui seções sobre mim, meus hobbies, projetos escolares e objetivos futuros. Foi desenvolvido sem frameworks, usando apenas HTML e CSS puros, o que me permitiu entender os fundamentos do desenvolvimento web.</p>
+                            <h4 class="mt-4">O Que Aprendi</h4>
+                            <ul>
+                                <li>Estrutura básica de HTML</li>
+                                <li>Estilização com CSS</li>
+                                <li>Design responsivo básico</li>
+                                <li>Organização de projetos</li>
+                                <li>Publicação de sites simples</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contato -->
+    <section id="contato" class="py-5 bg-white">
+        <div class="container">
+            <h2 class="section-title">Entre em Contato</h2>
+            <p class="lead mb-5">Estou sempre aberta a novas oportunidades de aprendizado e colaboração.</p>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card p-4 mb-4">
+                        <h4 class="mb-4">Informações de Contato</h4>
+                        <p><i class="bi bi-envelope-fill me-2"></i> email@exemplo.com</p>
+                        <p><i class="bi bi-geo-alt-fill me-2"></i> Rio de Janeiro, Brasil</p>
+                        <p><i class="bi bi-building me-2"></i> Estudante no Colégio Dom Pedro II</p>
+                        
+                        <div class="mt-4">
+                            <h5 class="mb-3">Redes Sociais</h5>
+                            <a href="#" class="social-icon"><i class="bi bi-github"></i></a>
+                            <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
+                            <a href="#" class="social-icon"><i class="bi bi-linkedin"></i></a>
+                            <a href="#" class="social-icon"><i class="bi bi-behance"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card p-4">
+                        <h4 class="mb-4">Envie uma Mensagem</h4>
+                        <form>
+                            <div class="mb-3">
+                                <label for="nome" class="form-label">Nome</label>
+                                <input type="text" class="form-control" id="nome" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="mensagem" class="form-label">Mensagem</label>
+                                <textarea class="form-control" id="mensagem" rows="4" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-rosa">Enviar Mensagem</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <div class="container">
+            <h3 class="mb-4">Kauane</h3>
+            <p class="mb-4">Estudante dedicada e apaixonada por aprender</p>
+            <div class="mb-4">
+                <a href="#" class="text-white mx-2"><i class="bi bi-github fs-4"></i></a>
+                <a href="#" class="text-white mx-2"><i class="bi bi-instagram fs-4"></i></a>
+                <a href="#" class="text-white mx-2"><i class="bi bi-linkedin fs-4"></i></a>
+            </div>
+            <p class="mb-0">© 2024 Portfólio de Kauane. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
